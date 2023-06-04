@@ -1,0 +1,82 @@
+<h1>JaggerStore</h1>
+<li><a href="/cart">Ver carrito de compras</a></li>
+<li><a href="./session/login">Iniciar Sesion</a></li>
+<li><a href="./session/register">Registrarse</a></li>
+<li><a href="./session/logout">salir</a></li>
+
+<hr>
+
+<div class="filters">
+  <a href="/products?sort=title&sortorder=asc&page=1&limit=10">Ver productos</a>
+  <form action="/products" method="GET">
+    <label for="filter">Filter:</label>
+    <select type="text" id="filter" name="filter" value="{{query.filter}}">
+      <option value="">All</option>
+      <option value="SSD">SSD</option>
+      <option value="RAM">RAM</option>
+      <option value="Motherboard">Motherboard</option>
+      <option value="Placa de video">Tarjetas Grafica</option>
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+</div>
+
+<div class="paginado">
+  {{#if data.hasPrevPage }}
+    <a class="active" href='{{data.firstLink}}'>Primera</a>
+    <a class="active" href='{{data.prevLink}}'>Anterior</a>
+  {{else}}
+    <a class="disabled">Primera</a>
+    <a class="disabled">Anterior</a>
+  {{/if}}
+  {{#if data.hasNextPage }}
+    <a class="active" href='{{data.nextLink}}'>Siguiente</a>
+    <a class="active" href='{{data.lastLink}}'>Ultima</a>
+  {{else}}
+    <a class="disabled">Siguiente</a>
+    <a class="disabled">Ultima</a>
+  {{/if}}
+</div>
+
+<div class="limite">
+  <a href="?limit=5">ver 5</a>
+  <a href="?limit=10">ver 10</a>
+  {{!-- <a href="?limit=20">ver 20</a>
+  <a href="?limit=50">ver 50</a> --}}
+</div>
+
+<h1>Products</h1>
+<hr>
+<table id="productsTable">
+  <tr>
+    <td><strong>Producto</strong></td>
+    <td><strong>Descripción</strong></td>
+    <td><strong>Precio</strong></td>
+    <td><strong>Código</strong></td>
+    <td><strong>Stock</strong></td>
+    <td><strong>Categoría</strong></td>
+  </tr>
+  {{#each data.docs}}
+  <tr>
+    <td>{{this.title}}</td>
+    <td>{{this.description}}</td>
+    <td>{{this.price}}</td>
+    <td>{{this.code}}</td>
+    <td>{{this.stock}}</td>
+    <td>{{this.category}}</td>
+    <td>
+      {{#if user}}
+        <form action="/cart/{{this._id}}" method="POST">
+          <input type="hidden" name="productID" value="{{this._id}}">
+          <input type="number" name="quantity" value="1" min="1">
+          <button type="submit">Agregar al carrito</button>
+        </form>
+      {{else}}
+        <button><a href="/carts/{{this.id}}">Agregar al carrito</a></button>
+      {{/if}}
+    </td>
+  </tr>
+  {{/each}}
+</table>
+
+<div id="moving"></div>

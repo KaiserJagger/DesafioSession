@@ -1,0 +1,16 @@
+<!-- cart-details.hbs -->
+
+<h1>Carrito</h1>
+<hr>
+
+{{#if cart}}
+  <h1>Detalles del Carrito</h1>
+  <hr>
+  <h2>ID del Carrito: {{cart._id}}</h2>
+  <h3>Productos:</h3>
+  <ul>
+    {{#each cart.products}}
+      <li>{{this.id}} - Cantidad: {{this.quantity}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
