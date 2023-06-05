@@ -2,7 +2,7 @@ import { Router } from "express";
 import UserModel from "../dao/models/user.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import passport from "passport";
-import CartModel from "../dao/models/cart.model.js";
+// import CartModel from "../dao/models/cart.model.js";
 
 const router = Router();
 

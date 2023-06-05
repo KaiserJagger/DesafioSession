@@ -1,8 +1,8 @@
 <h1>JaggerStore</h1>
-<li><a href="/cart">Ver carrito de compras</a></li>
+<li><a href="./carts">Ver carrito de compras</a></li>
 <li><a href="./session/login">Iniciar Sesion</a></li>
 <li><a href="./session/register">Registrarse</a></li>
-<li><a href="./session/logout">salir</a></li>
+<li><a href="./session/logout">Salir</a></li>
 
 <hr>
 
@@ -39,10 +39,10 @@
 </div>
 
 <div class="limite">
-  <a href="?limit=5">ver 5</a>
-  <a href="?limit=10">ver 10</a>
-  {{!-- <a href="?limit=20">ver 20</a>
-  <a href="?limit=50">ver 50</a> --}}
+  <a href="?limit=5">Ver 5</a>
+  <a href="?limit=10">Ver 10</a>
+  {{!-- <a href="?limit=20">Ver 20</a>
+  <a href="?limit=50">Ver 50</a> --}}
 </div>
 
 <h1>Products</h1>
@@ -55,6 +55,7 @@
     <td><strong>Código</strong></td>
     <td><strong>Stock</strong></td>
     <td><strong>Categoría</strong></td>
+    <td><strong>Acciones</strong></td>
   </tr>
   {{#each data.docs}}
   <tr>
@@ -66,13 +67,13 @@
     <td>{{this.category}}</td>
     <td>
       {{#if user}}
-        <form action="/cart/{{this._id}}" method="POST">
-          <input type="hidden" name="productID" value="{{this._id}}">
-          <input type="number" name="quantity" value="1" min="1">
+        <form action="/api/carts/{{this._id}}" method="POST">
+          <input type="hidden" name="pid" value="{{this._id}}">
+          <input type="number" name="qty" value="1" min="1">
           <button type="submit">Agregar al carrito</button>
         </form>
       {{else}}
-        <button><a href="/carts/{{this.id}}">Agregar al carrito</a></button>
+        <button><a href="/api/carts/:cid/products/{{this._id}}">Agregar al carrito</a></button>
       {{/if}}
     </td>
   </tr>

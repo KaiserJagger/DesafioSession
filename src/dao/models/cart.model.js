@@ -4,18 +4,23 @@ const cartCollection = "carts"
 
 const cartSchema = new mongoose.Schema({
     products: {
-        type: [{
-            id: {
+        type: [
+            {
+                product: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "products"
+                },
+                quantity: {
+                type: Number,
+                required: true,
+                },
             },
-            quantity: Number
-        }],
+        ],
         default: []
-    }
+    },
 })
+    cartSchema.pre('findById', function(){
+        this.populate("products.product")
+    })
 
-mongoose.set("strictQuery", false)
-const cartModel = mongoose.model(cartCollection, cartSchema)
-
-export default cartModel
+    export const cartModel = mongoose.model(cartCollection, cartSchema);

@@ -17,9 +17,9 @@ const run = (socketServer, app) => {
     app.use("/product/:", productRouter)
     app.use("/session", sessionRouter)
     app.use("/api/products", productRouter)
-    app.use("/carts", cartRouter)
+    app.use("/api/carts", cartRouter)
     app.use("/chat", chatRouter)
-   
+    
 
 
     socketServer.on("connection", socket => {

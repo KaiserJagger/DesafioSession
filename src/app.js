@@ -26,7 +26,7 @@ app.use(session({
         mongoUrl: MONGO_URI,
         dbName: MONGO_DB_NAME
     }),
-    secret: 'Nico1507ventiuno',
+    secret: 'Nico1507veintiuno',
     resave: true,
     saveUninitialized: true
 }))
@@ -42,7 +42,7 @@ mongoose.connect(MONGO_URI, {
         console.log("DB No conected...")
         return
     }
-    const httpServer = app.listen(8080, () => console.log("Listening..."))
+    const httpServer = app.listen(8080, () => console.log("Listening port: 8080"))
     const socketServer = new Server(httpServer)
     httpServer.on("error", (e) => console.log("ERROR: " + e))
 
